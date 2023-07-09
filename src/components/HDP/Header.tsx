@@ -6,7 +6,6 @@ import {
     TextInput,
     Title,
     rem,
-    useMantineTheme,
 } from "@mantine/core";
 import { IconFileInvoice, IconRepeat } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
@@ -27,16 +26,15 @@ const LeftLabelInput = ({ flex, label, input }: LeftLabelInputProps) => {
 };
 
 const Header = () => {
-    const theme = useMantineTheme();
-
     const [value, setValue] = useState<string | null>("react");
 
     return (
         <Flex
             align="center"
             gap="xs"
-            pb="xs"
-            sx={{ borderBottom: `1px solid ${theme.colors.gray[3]}` }}
+            sx={{
+                gridArea: "header",
+            }}
         >
             <LeftLabelInput label="Search:" input={<TextInput size="xs" />} />
             <LeftLabelInput

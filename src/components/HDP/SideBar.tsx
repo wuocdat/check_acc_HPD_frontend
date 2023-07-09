@@ -6,7 +6,6 @@ import {
     Radio,
     Stack,
     Title,
-    rem,
 } from "@mantine/core";
 import {
     IconFileInvoice,
@@ -24,7 +23,7 @@ const SideBar = () => {
     const [value, setValue] = useState(IOS_VALUE);
 
     return (
-        <Stack w={rem(250)}>
+        <Stack sx={{ gridArea: "sidebar" }}>
             <Stack spacing="xs">
                 <Divider label={<Title order={6}>Chức năng</Title>} />
                 <Button

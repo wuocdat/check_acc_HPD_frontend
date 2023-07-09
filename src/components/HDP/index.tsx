@@ -1,22 +1,36 @@
-import { Flex, Stack } from "@mantine/core";
+import { Box } from "@mantine/core";
+
 import Header from "./Header";
-import SideBar from "./SideBar";
 import DataTable from "./DataTable";
 import { mockDataAcc } from "./constants";
+import SideBar from "./SideBar";
 import Footer from "./Footer";
 
 const HDP = () => {
     return (
-        <Stack>
-            <Flex p="xs" pb={40} gap="xs" sx={{ flex: 1 }}>
-                <Stack sx={{ flex: 1 }}>
-                    <Header />
-                    <DataTable data={mockDataAcc} />
-                </Stack>
-                <SideBar />
-            </Flex>
+        <Box
+            h="100%"
+            component="div"
+            display="grid"
+            p="xs"
+            pb={0}
+            sx={(theme) => ({
+                gridTemplateColumns: "1fr 250px",
+                gridTemplateRows: "auto 1fr auto",
+                gridTemplateAreas: `
+                    "header sidebar"
+                    "table sidebar"
+                    "footer footer"
+                `,
+                gridGap: theme.spacing.xs,
+                boxSizing: "border-box",
+            })}
+        >
+            <Header />
+            <DataTable data={mockDataAcc} />
+            <SideBar />
             <Footer />
-        </Stack>
+        </Box>
     );
 };
 

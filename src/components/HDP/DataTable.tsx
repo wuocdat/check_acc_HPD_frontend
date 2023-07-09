@@ -1,13 +1,13 @@
 import {
-    ScrollArea,
+    Box,
     Table,
     TableProps,
     Title,
     createStyles,
     rem,
 } from "@mantine/core";
+
 import { AccHDP } from "../../types";
-import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -38,8 +38,7 @@ interface DataTableProps extends TableProps {
 const columns = ["email", "password", "proxy", "group", "data", "status"];
 
 const DataTable = ({ data, ...props }: DataTableProps) => {
-    const { classes, cx, theme } = useStyles();
-    const [scrolled, setScrolled] = useState(false);
+    const { classes, theme } = useStyles();
 
     const rows = data.map((row, index) => (
         <tr key={index}>
@@ -53,10 +52,7 @@ const DataTable = ({ data, ...props }: DataTableProps) => {
     ));
 
     return (
-        <ScrollArea
-            h={500}
-            onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-        >
+        <Box sx={{ gridArea: "table", overflow: "auto" }}>
             <Table
                 miw={700}
                 highlightOnHover
@@ -65,22 +61,20 @@ const DataTable = ({ data, ...props }: DataTableProps) => {
                 striped
                 {...props}
             >
-                <thead
-                    className={cx(classes.header, {
-                        [classes.scrolled]: scrolled,
-                    })}
-                >
-                    <tr style={{ backgroundColor: theme.colors.orange[2] }}>
+                <thead className={classes.header}>
+                    <tr style={{ backgroundColor: theme.colors.orange[5] }}>
                         {columns.map((column, index) => (
                             <th key={index}>
-                                <Title order={6}>{column}</Title>
+                                <Title color={theme.black} order={6}>
+                                    {column}
+                                </Title>
                             </th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
             </Table>
-        </ScrollArea>
+        </Box>
     );
 };
 
